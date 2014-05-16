@@ -15,6 +15,4 @@ public class Board extends Component{
 	//the method to draw board
 	public void paint(Graphics g){
 	}
-	
-	//test for Git usage
 }
