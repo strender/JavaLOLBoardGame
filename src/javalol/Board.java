@@ -17,15 +17,28 @@ public class Board extends JFrame{
 		
 		
 		//전반적인 레이아웃 짜는 부분
-		ImageIcon image = new ImageIcon("images/brand.png");
-		JLabel imageLabel = new JLabel(image);
-		imageLabel.setLocation(5, 6);
-		imageLabel.setSize(200, 200);
-		add(imageLabel);
+		ImageIcon image1 = new ImageIcon("images/brand.png");
+		JLabel imageLabel1 = new JLabel(image1);
+		imageLabel1.setLocation(10, 10);
+		imageLabel1.setSize(100, 100);
+		add(imageLabel1);
+		
+		ImageIcon image2 = new ImageIcon("images/Ahri.png");
+		JLabel imageLabel2 = new JLabel(image2);
+		imageLabel2.setLocation(110, 10);
+		imageLabel2.setSize(100, 100);
+		add(imageLabel2);
+		
+		ImageIcon image3 = new ImageIcon("images/Khazix.png");
+		JLabel imageLabel3 = new JLabel(image3);
+		imageLabel3.setLocation(10, 110);
+		imageLabel3.setSize(100, 100);
+		add(imageLabel3);
+		
 		
 		//버튼 테스트해보았습니다
 		JButton btn1 = new JButton("주사위굴리기");
-		btn1.setLocation(6, 221);
+		btn1.setLocation(6, 600);
 		btn1.setSize(120, 30);
 		add(btn1);
 		
