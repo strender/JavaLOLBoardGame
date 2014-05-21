@@ -36,7 +36,7 @@ public class Board extends JFrame{
 	JLabel imageLabel13 = new JLabel(image13);
 	ImageIcon image14 = new ImageIcon("images/white.jpeg");
 	JLabel imageLabel14 = new JLabel(image14);
-	ImageIcon image15 = new ImageIcon("images/Ahri.png");
+	ImageIcon image15 = new ImageIcon("images/Graves.png");
 	JLabel imageLabel15 = new JLabel(image15);
 	ImageIcon image16 = new ImageIcon("images/Lucian.png");
 	JLabel imageLabel16 = new JLabel(image16);
