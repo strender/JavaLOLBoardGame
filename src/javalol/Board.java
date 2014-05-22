@@ -1,6 +1,7 @@
 package javalol;
 
 import java.awt.*;
+
 import javax.swing.*;
 
 public class Board extends JFrame{
@@ -77,6 +78,11 @@ public class Board extends JFrame{
 	ImageIcon image32 = new ImageIcon("images/Draven.png");
 	JLabel imageLabel32 = new JLabel(image32);
 	
+	JButton dice, yesbtn, nobtn;
+	JTextArea text;
+	JPanel textPanel;
+	JScrollPane scrollingArea;
+	
 	//Constructor method
 	public Board(){
 		setTitle("LOLBoardGame");
@@ -87,7 +93,6 @@ public class Board extends JFrame{
 		
 		
 		//전반적인 레이아웃 짜는 부분
-		
 		createImage(imageLabel1, 690, 670);
 		createImage(imageLabel2, 610, 670);
 		createImage(imageLabel3, 530, 670);
@@ -123,13 +128,32 @@ public class Board extends JFrame{
 
 		
 		//버튼 부착
-		JButton btn1 = new JButton("주사위굴리기");
-		btn1.setLocation(800, 500);
-		btn1.setSize(120, 30);
-		add(btn1);
+		dice = new JButton("주사위굴리기");
+		dice.setLocation(940, 500);
+		dice.setSize(120, 30);
+		add(dice);
+		
+		yesbtn = new JButton("YES");
+		yesbtn.setLocation(900, 540);
+		yesbtn.setSize(100, 30);
+		add(yesbtn);
+		
+		nobtn = new JButton("NO");
+		nobtn.setLocation(1000, 540);
+		nobtn.setSize(100, 30);
+		add(nobtn);
+		
+		//TextArea
+		text = new JTextArea(6, 20);
+		text.setText("helloworldhelloworldhelloworldhelloworld");
+		scrollingArea = new JScrollPane(text);
+		scrollingArea.setLocation(100, 100);
+		
 		
 		//레이아웃 다짠 후에 패널 부착!
 		Container contentPane = getContentPane();
+		this.getContentPane().add(scrollingArea, BorderLayout.NORTH);
+		//setContentPane(scrollingArea);
 		contentPane.setBackground(Color.WHITE);
 		
 		
