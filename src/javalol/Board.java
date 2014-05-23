@@ -96,7 +96,7 @@ public class Board extends JFrame{
 	ImageIcon image32 = new ImageIcon("images/Draven.png");
 	JLabel imageLabel32 = new JLabel(image32);
 	
-	JButton dice, yesbtn, nobtn;
+	JButton dice, okbtn, yesbtn, nobtn;
 	JTextArea p1status, p2status, text;
 	Border border = BorderFactory.createLineBorder(Color.black);
 	
@@ -146,9 +146,14 @@ public class Board extends JFrame{
 		
 		//버튼 부착
 		dice = new JButton("주사위굴리기");
-		dice.setLocation(940, 500);
-		dice.setSize(120, 30);
+		dice.setLocation(900, 500);
+		dice.setSize(100, 30);
 		add(dice);
+		
+		okbtn = new JButton("OK");
+		okbtn.setLocation(1000, 500);
+		okbtn.setSize(100, 30);
+		add(okbtn);
 		
 		yesbtn = new JButton("YES");
 		yesbtn.setLocation(900, 540);
