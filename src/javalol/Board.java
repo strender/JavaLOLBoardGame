@@ -14,8 +14,16 @@ import javax.swing.JTextArea;
 import javax.swing.border.Border;
 
 public class Board extends JFrame{
+	//전체  Frame 크기 지정
 	private int width = 1200;
 	private int height = 800;
+
+	//Player 생성
+	private Player p1 = new Player(1);
+	private Player p2 = new Player(2);
+	
+	String status  = "" + p1.Name + "                       " +p2.Name + "\nmoney:" + p1.money +"$         money:" + p2.money + "$\nHP:" + p1.health + "                 HP:" + p2.health;
+	
 	ImageIcon image1 = new ImageIcon("images/white.jpeg");
 	JLabel imageLabel1 = new JLabel(image1);
 	ImageIcon image2 = new ImageIcon("images/Alistar.png");
@@ -89,8 +97,6 @@ public class Board extends JFrame{
 	
 	JButton dice, yesbtn, nobtn;
 	JTextArea text;
-	JPanel textPanel;
-	JScrollPane scrollingArea;
 	
 	//Constructor method
 	public Board(){
@@ -154,7 +160,7 @@ public class Board extends JFrame{
 		
 		//TextArea
 		text = new JTextArea();
-		text.setText("helloworld helloworld \nhelloworld helloworld");
+		text.setText(status);
 		text.setBounds(870, 140, 250, 350);
 		Border border = BorderFactory.createLineBorder(Color.black);
 		text.setBorder(border);
