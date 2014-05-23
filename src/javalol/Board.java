@@ -20,10 +20,9 @@ public class Board extends JFrame{
 	private Player p1 = new Player(1);
 	private Player p2 = new Player(2);
 	
-	StringBuffer p1stat = new StringBuffer();
-	StringBuffer p2stat = new StringBuffer();
-	
-	String result;
+	String p1stat = p1.Name + "\nMoney: " + p1.money + "$\nHP: " + p1.health;
+	String p2stat = p2.Name + "\nMoney: " + p2.money + "$\nHP: " + p2.health;
+	String result = "여기에 게임 진행상황이 나타날 것입니다.";
 	
 	ImageIcon image1 = new ImageIcon("images/white.jpeg");
 	JLabel imageLabel1 = new JLabel(image1);
@@ -167,14 +166,14 @@ public class Board extends JFrame{
 		
 		//TextArea
 		p1status = new JTextArea();
-		p1status.setText("player1's information");
+		p1status.setText(p1stat);
 		p1status.setBounds(870, 140, 125, 100);
 		p1status.setBorder(border);
 		p1status.setEditable(false);
 		add(p1status);
 		
 		p2status = new JTextArea();
-		p2status.setText("player2's information");
+		p2status.setText(p2stat);
 		p2status.setBounds(995, 140, 125, 100);
 		p2status.setBorder(border);
 		p2status.setEditable(false);
