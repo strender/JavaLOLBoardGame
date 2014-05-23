@@ -1,8 +1,17 @@
 package javalol;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Container;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.border.Border;
 
 public class Board extends JFrame{
 	private int width = 1200;
@@ -144,16 +153,16 @@ public class Board extends JFrame{
 		add(nobtn);
 		
 		//TextArea
-		text = new JTextArea(6, 20);
-		text.setText("helloworldhelloworldhelloworldhelloworld");
-		scrollingArea = new JScrollPane(text);
-		scrollingArea.setLocation(100, 100);
-		
+		text = new JTextArea();
+		text.setText("helloworld helloworld \nhelloworld helloworld");
+		text.setBounds(870, 140, 250, 350);
+		Border border = BorderFactory.createLineBorder(Color.black);
+		text.setBorder(border);
+		text.setEditable(false);
+		add(text);
 		
 		//레이아웃 다짠 후에 패널 부착!
 		Container contentPane = getContentPane();
-		this.getContentPane().add(scrollingArea, BorderLayout.NORTH);
-		//setContentPane(scrollingArea);
 		contentPane.setBackground(Color.WHITE);
 		
 		
