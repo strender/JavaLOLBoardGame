@@ -20,7 +20,10 @@ public class Board extends JFrame{
 	private Player p1 = new Player(1);
 	private Player p2 = new Player(2);
 	
-	String status  = "" + p1.Name + "                       " +p2.Name + "\nmoney:" + p1.money +"$         money:" + p2.money + "$\nHP:" + p1.health + "                 HP:" + p2.health;
+	StringBuffer p1stat = new StringBuffer();
+	StringBuffer p2stat = new StringBuffer();
+	
+	String result;
 	
 	ImageIcon image1 = new ImageIcon("images/white.jpeg");
 	JLabel imageLabel1 = new JLabel(image1);
@@ -96,6 +99,7 @@ public class Board extends JFrame{
 	JButton dice, yesbtn, nobtn;
 	JTextArea p1status, p2status, text;
 	Border border = BorderFactory.createLineBorder(Color.black);
+	
 	//Constructor method
 	public Board(){
 		setTitle("LOLBoardGame");
@@ -172,7 +176,7 @@ public class Board extends JFrame{
 		add(p2status);
 		
 		text = new JTextArea();
-		text.setText(status);
+		text.setText(result);
 		text.setBounds(870, 240, 250, 250);
 		text.setBorder(border);
 		text.setEditable(false);
