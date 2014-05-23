@@ -2,6 +2,7 @@ package javalol;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Graphics;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -15,6 +16,8 @@ public class Board extends JFrame{
 	//전체  Frame 크기 지정
 	private int width = 1200;
 	private int height = 800;
+	boolean finish = false;
+	private int turn = 1;
 
 	//Player 생성
 	private Player p1 = new Player(1);
@@ -22,7 +25,7 @@ public class Board extends JFrame{
 	
 	String p1stat = p1.Name + "\nMoney: " + p1.money + "$\nHP: " + p1.health;
 	String p2stat = p2.Name + "\nMoney: " + p2.money + "$\nHP: " + p2.health;
-	String result = "여기에 게임 진행상황이 나타날 것입니다.";
+	String message = "여기에 게임 진행상황이 나타날 것입니다.";
 	
 	ImageIcon image1 = new ImageIcon("images/white.jpeg");
 	JLabel imageLabel1 = new JLabel(image1);
@@ -95,6 +98,7 @@ public class Board extends JFrame{
 	ImageIcon image32 = new ImageIcon("images/Draven.png");
 	JLabel imageLabel32 = new JLabel(image32);
 	
+	Graphics g;
 	JButton dice, okbtn, yesbtn, nobtn;
 	JTextArea p1status, p2status, text;
 	Border border = BorderFactory.createLineBorder(Color.black);
@@ -180,7 +184,7 @@ public class Board extends JFrame{
 		add(p2status);
 		
 		text = new JTextArea();
-		text.setText(result);
+		text.setText(message);
 		text.setBounds(870, 240, 250, 250);
 		text.setBorder(border);
 		text.setEditable(false);
@@ -190,13 +194,35 @@ public class Board extends JFrame{
 		Container contentPane = getContentPane();
 		contentPane.setBackground(Color.WHITE);
 		
-		
-	}
+		while(finish){
+			resetMessage();
+			if(turn == 1){
+				message = p1.Name + "'s Turn! Roll the Dice!";
+				rollDice(g);
+				turn = 2;
+			}else{
+				turn = 1;
+			}
+		}
+	}//END of constructor
 	
 	//이미지 붙이는데 코드 줄이기 위한 메서드
 	public void createImage(JLabel label, int xLocation, int yLocation){
 		label.setLocation(xLocation, yLocation);
 		label.setSize(80, 80);
 		add(label);
+	}
+	
+	public void resetMessage(){
+		message = "";
+	}
+	
+	public void rollDice(Graphics g){
+		int dice1 = (int) (Math.random() * 6);
+		int dice2 = (int) (Math.random() * 6);
+		
+		g.fill3DRect(300, 300, 100, 100, true);
+		g.fill3DRect(300, 400, 100, 100, true);
+		
 	}
 }
