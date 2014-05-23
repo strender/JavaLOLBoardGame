@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 public class Player {
 	public String Name;
-	public int position = 0;
+	public int position = 1;
 	public int PlayerNum;
 	public int money;
 	public int health;
@@ -23,8 +23,12 @@ public class Player {
 		health = 550;
 	}
 	
-	public void Move(){
-		
+	public void Move(int dice){
+		if(position+dice < 33){
+			position += dice;
+		} else{
+			position = position + dice - 32;
+		}
 	}
 	
 	public void drawPlayer(){
