@@ -96,8 +96,8 @@ public class Board extends JFrame{
 	JLabel imageLabel32 = new JLabel(image32);
 	
 	JButton dice, yesbtn, nobtn;
-	JTextArea text;
-	
+	JTextArea p1status, p2status, text;
+	Border border = BorderFactory.createLineBorder(Color.black);
 	//Constructor method
 	public Board(){
 		setTitle("LOLBoardGame");
@@ -159,10 +159,23 @@ public class Board extends JFrame{
 		add(nobtn);
 		
 		//TextArea
+		p1status = new JTextArea();
+		p1status.setText("player1's information");
+		p1status.setBounds(870, 140, 125, 100);
+		p1status.setBorder(border);
+		p1status.setEditable(false);
+		add(p1status);
+		
+		p2status = new JTextArea();
+		p2status.setText("player2's information");
+		p2status.setBounds(995, 140, 125, 100);
+		p2status.setBorder(border);
+		p2status.setEditable(false);
+		add(p2status);
+		
 		text = new JTextArea();
 		text.setText(status);
-		text.setBounds(870, 140, 250, 350);
-		Border border = BorderFactory.createLineBorder(Color.black);
+		text.setBounds(870, 240, 250, 250);
 		text.setBorder(border);
 		text.setEditable(false);
 		add(text);
