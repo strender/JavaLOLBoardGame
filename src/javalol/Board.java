@@ -194,12 +194,13 @@ public class Board extends JFrame{
 		Container contentPane = getContentPane();
 		contentPane.setBackground(Color.WHITE);
 		
-		while(finish){
+		while(!finish){
 			resetMessage();
 			if(turn == 1){
 				message = p1.Name + "'s Turn! Roll the Dice!";
-				rollDice(g);
-				turn = 2;
+				text.append("" + rollDice());
+				break;
+				//turn = 2;
 			}else{
 				turn = 1;
 			}
@@ -217,12 +218,17 @@ public class Board extends JFrame{
 		message = "";
 	}
 	
-	public void rollDice(Graphics g){
+	public int rollDice(){
+		int total_dice = 0;
 		int dice1 = (int) (Math.random() * 6);
 		int dice2 = (int) (Math.random() * 6);
+		total_dice = dice1 + dice2;
+		//g.fill3DRect(300, 300, 100, 100, true);
+		//g.fill3DRect(300, 400, 100, 100, true);
+		return total_dice;
 		
-		g.fill3DRect(300, 300, 100, 100, true);
-		g.fill3DRect(300, 400, 100, 100, true);
+		
+		
 		
 	}
 }
