@@ -14,14 +14,15 @@ import javax.swing.border.Border;
 
 public class Board extends JFrame{
 	//전체  Frame 크기 지정
-	private int width = 1200;
-	private int height = 800;
-	boolean finish = false;
-	private int turn = 1;
+	private int width = 1200; //프레임의 가로길이
+	private int height = 800; //프레임의 세로길이
+
+	boolean finish = false; //게임이 끝났는지 안끝나는지 나타내는 불값. true가 되면 게임이 종료된다
+	private int next = 1; //편의상 player를 숫자로 나타낸 것. player1 = 1, player = 2; 
 
 	//Player 생성
-	private Player p1 = new Player(1);
-	private Player p2 = new Player(2);
+	private Player p1 = new Player(1); //Player1
+	private Player p2 = new Player(2); //Player2
 	
 	String p1stat = p1.Name + "\nMoney: " + p1.money + "$\nHP: " + p1.health;
 	String p2stat = p2.Name + "\nMoney: " + p2.money + "$\nHP: " + p2.health;
@@ -173,6 +174,7 @@ public class Board extends JFrame{
 		p1status.setText(p1stat);
 		p1status.setBounds(870, 140, 125, 100);
 		p1status.setBorder(border);
+		p1status.setBackground(Color.YELLOW);
 		p1status.setEditable(false);
 		add(p1status);
 		
@@ -180,6 +182,7 @@ public class Board extends JFrame{
 		p2status.setText(p2stat);
 		p2status.setBounds(995, 140, 125, 100);
 		p2status.setBorder(border);
+		p2status.setBackground(Color.cyan);
 		p2status.setEditable(false);
 		add(p2status);
 		
@@ -196,13 +199,13 @@ public class Board extends JFrame{
 		
 		while(!finish){
 			resetMessage();
-			if(turn == 1){
+			if(next == 1){
 				message = p1.Name + "'s Turn! Roll the Dice!";
 				text.append("" + rollDice());
 				break;
-				//turn = 2;
+				//next = 2;
 			}else{
-				turn = 1;
+				next = 1;
 			}
 		}
 	}//END of constructor
@@ -215,7 +218,7 @@ public class Board extends JFrame{
 	}
 	
 	public void resetMessage(){
-		message = "";
+		this.message = "";
 	}
 	
 	public int rollDice(){
