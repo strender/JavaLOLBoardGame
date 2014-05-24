@@ -158,7 +158,6 @@ public class Board extends JFrame{
 		add(dice);
 		
 		okbtn = new JButton("OK");
-		okbtn.addActionListener(new OKListener());
 		okbtn.setLocation(1000, 500);
 		okbtn.setSize(100, 30);
 		add(okbtn);
@@ -173,10 +172,10 @@ public class Board extends JFrame{
 		nobtn.setSize(100, 30);
 		add(nobtn);
 		
-		//
+		//ActionListener for each button
 		dice.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				System.out.println("presssed dice");
+				text.append("" + rollDice());
 			}
 		});
 		
@@ -252,8 +251,8 @@ public class Board extends JFrame{
 	
 	public int rollDice(){
 		int total_dice = 0;
-		int dice1 = (int) (Math.random() * 6);
-		int dice2 = (int) (Math.random() * 6);
+		int dice1 = (int) (Math.random() * 5) + 1;
+		int dice2 = (int) (Math.random() * 5) + 1;
 		total_dice = dice1 + dice2;
 		//g.fill3DRect(300, 300, 100, 100, true);
 		//g.fill3DRect(300, 400, 100, 100, true);
