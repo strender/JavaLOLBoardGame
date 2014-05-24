@@ -3,6 +3,8 @@ package javalol;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -24,11 +26,12 @@ public class Board extends JFrame{
 	private Player p1 = new Player(1); //Player1
 	private Player p2 = new Player(2); //Player2
 	
+	//TextArea에 출력되는 메세지
 	String p1stat = p1.Name + "\nMoney: " + p1.money + "$\nHP: " + p1.health;
 	String p2stat = p2.Name + "\nMoney: " + p2.money + "$\nHP: " + p2.health;
 	String message = "여기에 게임 진행상황이 나타날 것입니다.";
 	
-	ImageIcon image1 = new ImageIcon("images/white.jpeg");
+	ImageIcon image1 = new ImageIcon("images/white.jpeg"); //Start Position
 	JLabel imageLabel1 = new JLabel(image1);
 	ImageIcon image2 = new ImageIcon("images/Alistar.png");
 	JLabel imageLabel2 = new JLabel(image2);
@@ -36,7 +39,7 @@ public class Board extends JFrame{
 	JLabel imageLabel3 = new JLabel(image3);
 	ImageIcon image4 = new ImageIcon("images/Zac.png");
 	JLabel imageLabel4 = new JLabel(image4);
-	ImageIcon image5 = new ImageIcon("images/white.jpeg");
+	ImageIcon image5 = new ImageIcon("images/white.jpeg"); //Chance Card
 	JLabel imageLabel5 = new JLabel(image5);
 	ImageIcon image6 = new ImageIcon("images/Heimerdinger.png");
 	JLabel imageLabel6 = new JLabel(image6);
@@ -44,7 +47,7 @@ public class Board extends JFrame{
 	JLabel imageLabel7 = new JLabel(image7);
 	ImageIcon image8 = new ImageIcon("images/Caitlyn.png");
 	JLabel imageLabel8 = new JLabel(image8);
-	ImageIcon image9 = new ImageIcon("images/white.jpeg");
+	ImageIcon image9 = new ImageIcon("images/white.jpeg"); //Disconnect
 	//밑 가로줄 끝
 	
 	JLabel imageLabel9 = new JLabel(image9);
@@ -52,17 +55,17 @@ public class Board extends JFrame{
 	JLabel imageLabel10 = new JLabel(image10);
 	ImageIcon image11 = new ImageIcon("images/TwistedFate.png");
 	JLabel imageLabel11 = new JLabel(image11);
-	ImageIcon image12 = new ImageIcon("images/white.jpeg");
+	ImageIcon image12 = new ImageIcon("images/white.jpeg"); //Chance Card
 	JLabel imageLabel12 = new JLabel(image12);
 	ImageIcon image13 = new ImageIcon("images/Vladimir.png");
 	JLabel imageLabel13 = new JLabel(image13);
-	ImageIcon image14 = new ImageIcon("images/white.jpeg");
+	ImageIcon image14 = new ImageIcon("images/white.jpeg"); //Chance Card
 	JLabel imageLabel14 = new JLabel(image14);
-	ImageIcon image15 = new ImageIcon("images/Graves.png");
+	ImageIcon image15 = new ImageIcon("images/Graves.png"); 
 	JLabel imageLabel15 = new JLabel(image15);
 	ImageIcon image16 = new ImageIcon("images/Lucian.png");
 	JLabel imageLabel16 = new JLabel(image16);
-	ImageIcon image17 = new ImageIcon("images/white.jpeg");
+	ImageIcon image17 = new ImageIcon("images/white.jpeg"); //Chance Card
 	//왼쪽 새로줄 끝
 	
 	JLabel imageLabel17 = new JLabel(image17);
@@ -70,7 +73,7 @@ public class Board extends JFrame{
 	JLabel imageLabel18 = new JLabel(image18);
 	ImageIcon image19 = new ImageIcon("images/Renekton.png");
 	JLabel imageLabel19 = new JLabel(image19);
-	ImageIcon image20 = new ImageIcon("images/white.jpeg");
+	ImageIcon image20 = new ImageIcon("images/white.jpeg"); //Chance Card
 	JLabel imageLabel20 = new JLabel(image20);
 	ImageIcon image21 = new ImageIcon("images/Lissandra.png");
 	JLabel imageLabel21 = new JLabel(image21);
@@ -80,7 +83,7 @@ public class Board extends JFrame{
 	JLabel imageLabel23 = new JLabel(image23);
 	ImageIcon image24 = new ImageIcon("images/Ahri.png");
 	JLabel imageLabel24 = new JLabel(image24);
-	ImageIcon image25 = new ImageIcon("images/white.jpeg");
+	ImageIcon image25 = new ImageIcon("images/white.jpeg"); //Chance Card
 	//위 가로줄 끝
 	
 	JLabel imageLabel25 = new JLabel(image25);
@@ -90,7 +93,7 @@ public class Board extends JFrame{
 	JLabel imageLabel27 = new JLabel(image27);
 	ImageIcon image28 = new ImageIcon("images/Syndra.png");
 	JLabel imageLabel28 = new JLabel(image28);
-	ImageIcon image29 = new ImageIcon("images/white.jpg");
+	ImageIcon image29 = new ImageIcon("images/white.jpg"); //Chance Card
 	JLabel imageLabel29 = new JLabel(image29);
 	ImageIcon image30 = new ImageIcon("images/Katarina.png");
 	JLabel imageLabel30 = new JLabel(image30);
@@ -101,7 +104,7 @@ public class Board extends JFrame{
 	
 	Graphics g;
 	JButton dice, okbtn, yesbtn, nobtn;
-	JTextArea p1status, p2status, text;
+	JTextArea p1status, p2status, text, d1, d2;
 	Border border = BorderFactory.createLineBorder(Color.black);
 	
 	//Constructor method
@@ -155,6 +158,7 @@ public class Board extends JFrame{
 		add(dice);
 		
 		okbtn = new JButton("OK");
+		okbtn.addActionListener(new OKListener());
 		okbtn.setLocation(1000, 500);
 		okbtn.setSize(100, 30);
 		add(okbtn);
@@ -168,6 +172,29 @@ public class Board extends JFrame{
 		nobtn.setLocation(1000, 540);
 		nobtn.setSize(100, 30);
 		add(nobtn);
+		
+		//
+		dice.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				System.out.println("presssed dice");
+			}
+		});
+		
+		okbtn.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				System.out.println("presssed ok");
+			}
+		});
+		yesbtn.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				System.out.println("presssed yesbtn");
+			}
+		});
+		nobtn.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				System.out.println("presssed nobtn");
+			}
+		});
 		
 		//TextArea
 		p1status = new JTextArea();
@@ -200,7 +227,7 @@ public class Board extends JFrame{
 		while(!finish){
 			resetMessage();
 			if(next == 1){
-				message = p1.Name + "'s Turn! Roll the Dice!";
+				text.append(p1.Name + "'s Turn! Roll the Dice! \n");
 				text.append("" + rollDice());
 				break;
 				//next = 2;
@@ -210,6 +237,7 @@ public class Board extends JFrame{
 		}
 	}//END of constructor
 	
+	
 	//이미지 붙이는데 코드 줄이기 위한 메서드
 	public void createImage(JLabel label, int xLocation, int yLocation){
 		label.setLocation(xLocation, yLocation);
@@ -217,8 +245,9 @@ public class Board extends JFrame{
 		add(label);
 	}
 	
+	//text창 초기화하기
 	public void resetMessage(){
-		this.message = "";
+		text.setText("");
 	}
 	
 	public int rollDice(){
