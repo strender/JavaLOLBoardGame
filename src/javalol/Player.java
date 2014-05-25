@@ -31,6 +31,11 @@ public class Player {
 		}
 	}
 	
+	public String alertLocation(){
+		String s = Name + "이" + position + "을 밟았습니다!";
+		return s;
+	}
+	
 	public void drawPlayer(){
 		
 	}	

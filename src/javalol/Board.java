@@ -193,17 +193,17 @@ public class Board extends JFrame{
 		
 		okbtn.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				System.out.println("presssed ok");
+				System.out.println("O");
 			}
 		});
 		yesbtn.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				System.out.println("presssed yesbtn");
+				System.out.println("Y");
 			}
 		});
 		nobtn.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				System.out.println("presssed nobtn");
+				System.out.println("N");
 			}
 		});
 		
@@ -239,6 +239,14 @@ public class Board extends JFrame{
 			resetMessage();
 			if(next == 1){
 				text.append(p1.Name + "'s Turn! Roll the Dice! \n");
+				dice_num = rollDice();
+				text.append(dice_num + "!\n");
+				p1.Move(dice_num);
+				text.append(p1.alertLocation());
+				
+				
+				
+				
 				break;
 				//next = 2;
 			}else{
