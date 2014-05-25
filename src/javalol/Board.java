@@ -5,6 +5,7 @@ import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -20,7 +21,8 @@ public class Board extends JFrame{
 	private int height = 800; //프레임의 세로길이
 
 	boolean finish = false; //게임이 끝났는지 안끝나는지 나타내는 불값. true가 되면 게임이 종료된다
-	private int next = 1; //편의상 player를 숫자로 나타낸 것. player1 = 1, player = 2; 
+	private int next = 1; //편의상 player를 숫자로 나타낸 것. player1 = 1, player = 2;
+	private int dice_num = 0; //주사위 숫자값 저장하는 곳
 
 	//Player 생성
 	private Player p1 = new Player(1); //Player1
@@ -30,6 +32,9 @@ public class Board extends JFrame{
 	String p1stat = p1.Name + "\nMoney: " + p1.money + "$\nHP: " + p1.health;
 	String p2stat = p2.Name + "\nMoney: " + p2.money + "$\nHP: " + p2.health;
 	String message = "여기에 게임 진행상황이 나타날 것입니다.";
+	
+	ArrayList<ImageIcon> imageIcon= new ArrayList<ImageIcon>();
+	
 	
 	ImageIcon image1 = new ImageIcon("images/white.jpeg"); //Start Position
 	JLabel imageLabel1 = new JLabel(image1);
@@ -175,7 +180,8 @@ public class Board extends JFrame{
 		//ActionListener for each button
 		dice.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				text.append("" + rollDice());
+				dice_num = rollDice();
+				text.append("" + dice_num + "!\n");
 			}
 		});
 		
@@ -227,11 +233,10 @@ public class Board extends JFrame{
 			resetMessage();
 			if(next == 1){
 				text.append(p1.Name + "'s Turn! Roll the Dice! \n");
-				text.append("" + rollDice());
 				break;
 				//next = 2;
 			}else{
-				next = 1;
+				text.append(p2.Name + "'s Turn! Roll the Dice! \n");
 			}
 		}
 	}//END of constructor
