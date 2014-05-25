@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
 
-public class Board extends JFrame{
+public class Board extends JFrame implements ActionListener{
 	//전체  Frame 크기 지정
 	private int width = 1200; //프레임의 가로길이
 	private int height = 800; //프레임의 세로길이
@@ -163,7 +163,7 @@ public class Board extends JFrame{
 		add(imageLabel33);
 		
 		//버튼 부착
-		dice = new JButton("주사위굴리기");
+		dice = new JButton("ROLL_DICE");
 		dice.setLocation(900, 500);
 		dice.setSize(100, 30);
 		add(dice);
@@ -183,17 +183,10 @@ public class Board extends JFrame{
 		nobtn.setSize(100, 30);
 		add(nobtn);
 		
-		//ActionListener for each button
-		dice.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				dice_num = rollDice();
-				text.append("" + dice_num + "!\n");
-			}
-		});
-		
-		okbtn.addActionListener(new ButtonListener());
-		yesbtn.addActionListener(new ButtonListener());
-		nobtn.addActionListener(new ButtonListener());
+		dice.addActionListener(this);
+		okbtn.addActionListener(this);
+		yesbtn.addActionListener(this);
+		nobtn.addActionListener(this);
 		
 		//TextArea
 		p1status = new JTextArea();
@@ -263,6 +256,21 @@ public class Board extends JFrame{
 		
 		
 		
+		
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getActionCommand() == "ROLL_DICE"){
+			dice_num = rollDice();
+			text.append("" + dice_num + "!\n");
+		} else if(e.getActionCommand() == "OK"){
+			System.out.println("Ok");
+		} else if(e.getActionCommand() == "YES"){
+			System.out.println("Yes");
+		} else{ 
+			System.out.println("NO");
+		}//END of if..else
 		
 	}
 }
