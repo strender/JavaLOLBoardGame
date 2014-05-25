@@ -191,21 +191,9 @@ public class Board extends JFrame{
 			}
 		});
 		
-		okbtn.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				System.out.println("O");
-			}
-		});
-		yesbtn.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				System.out.println("Y");
-			}
-		});
-		nobtn.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				System.out.println("N");
-			}
-		});
+		okbtn.addActionListener(new ButtonListener());
+		yesbtn.addActionListener(new ButtonListener());
+		nobtn.addActionListener(new ButtonListener());
 		
 		//TextArea
 		p1status = new JTextArea();
@@ -243,10 +231,6 @@ public class Board extends JFrame{
 				text.append(dice_num + "!\n");
 				p1.Move(dice_num);
 				text.append(p1.alertLocation());
-				
-				
-				
-				
 				break;
 				//next = 2;
 			}else{
@@ -270,8 +254,8 @@ public class Board extends JFrame{
 	
 	public int rollDice(){
 		int total_dice = 0;
-		int dice1 = (int) (Math.random() * 5) + 1;
-		int dice2 = (int) (Math.random() * 5) + 1;
+		int dice1 = (int) (Math.random() * 6) + 1;
+		int dice2 = (int) (Math.random() * 6) + 1;
 		total_dice = dice1 + dice2;
 		//g.fill3DRect(300, 300, 100, 100, true);
 		//g.fill3DRect(300, 400, 100, 100, true);
