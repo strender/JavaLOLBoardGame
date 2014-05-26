@@ -33,31 +33,50 @@ public class Board extends JFrame implements ActionListener{
 	String p2stat = p2.Name + "\nMoney: " + p2.money + "$\nHP: " + p2.health;
 	String message = "여기에 게임 진행상황이 나타날 것입니다.";
 	
-	ArrayList<ImageIcon> imageIcon= new ArrayList<ImageIcon>();
+	//이미지 배치할 좌표 지정해둔 정수형 배열.
+	int places[][] = {
+		{690, 670}, {610, 670}, {530, 670}, {450, 670}, {370, 670}, {290, 670}, {210, 670}, {130, 670}, {50, 670},//밑 가로줄 
+		{50, 590}, {50, 510}, {50, 430}, {50, 350}, {50, 270}, {50, 190}, {50, 110}, {50, 30}, //왼쪽 세로줄 끝
+		{130, 30}, {210, 30}, {290, 30}, {370, 30}, {450, 30}, {530, 30}, {610, 30}, {690, 30}, //위 가로줄 끝
+		{690, 110}, {690, 190}, {690, 270}, {690, 350}, {690, 430}, {690, 510}, {690, 590} //오른쪽 세로줄 끝
+	};
 	
-	Block block0 = new Block();
-	Block block1 = new Block("Alistar", false, 1, 1, 1, 1, 1, 610, 670);
+	ImageIcon imagetest[] = {
+		new ImageIcon("images/white.jpeg"),
+		new ImageIcon("images/Alistar.png"),
+		new ImageIcon("images/Garen.png"),
+		new ImageIcon("images/Zac.png"),
+		new ImageIcon(""),
+		new ImageIcon(""),
+		new ImageIcon(""),
+		new ImageIcon(""),
+		new ImageIcon(""),
+		new ImageIcon(""),
+		new ImageIcon(""),
+		new ImageIcon(""),
+		new ImageIcon(""),
+	};
 	
-	ImageIcon image1 = new ImageIcon("images/white.jpeg"); //Start Position
+	ImageIcon image0 = new ImageIcon("images/white.jpeg"); //Start Position
+	JLabel imageLabel0 = new JLabel(image0);
+	ImageIcon image1 = new ImageIcon("images/Alistar.png");
 	JLabel imageLabel1 = new JLabel(image1);
-	ImageIcon image2 = new ImageIcon("images/Alistar.png");
+	ImageIcon image2 = new ImageIcon("images/Garen.png");
 	JLabel imageLabel2 = new JLabel(image2);
-	ImageIcon image3 = new ImageIcon("images/Garen.png");
+	ImageIcon image3 = new ImageIcon("images/Zac.png");
 	JLabel imageLabel3 = new JLabel(image3);
-	ImageIcon image4 = new ImageIcon("images/Zac.png");
+	ImageIcon image4 = new ImageIcon("images/white.jpeg"); //Chance Card
 	JLabel imageLabel4 = new JLabel(image4);
-	ImageIcon image5 = new ImageIcon("images/white.jpeg"); //Chance Card
+	ImageIcon image5 = new ImageIcon("images/Heimerdinger.png");
 	JLabel imageLabel5 = new JLabel(image5);
-	ImageIcon image6 = new ImageIcon("images/Heimerdinger.png");
+	ImageIcon image6 = new ImageIcon("images/Darius.png");
 	JLabel imageLabel6 = new JLabel(image6);
-	ImageIcon image7 = new ImageIcon("images/Darius.png");
+	ImageIcon image7 = new ImageIcon("images/Caitlyn.png");
 	JLabel imageLabel7 = new JLabel(image7);
-	ImageIcon image8 = new ImageIcon("images/Caitlyn.png");
+	ImageIcon image8 = new ImageIcon("images/white.jpeg"); //Disconnect
 	JLabel imageLabel8 = new JLabel(image8);
-	ImageIcon image9 = new ImageIcon("images/white.jpeg"); //Disconnect
 	//밑 가로줄 끝
 	
-	JLabel imageLabel9 = new JLabel(image9);
 	ImageIcon image10 = new ImageIcon("images/Ryze.png");
 	JLabel imageLabel10 = new JLabel(image10);
 	ImageIcon image11 = new ImageIcon("images/TwistedFate.png");
@@ -112,6 +131,8 @@ public class Board extends JFrame implements ActionListener{
 	ImageIcon image33 = new ImageIcon("images/test.png");
 	JLabel imageLabel33 = new JLabel(image33);
 	
+	ImageIcon[] image = {image1, image2};
+	
 	Graphics g;
 	JButton dice, okbtn, yesbtn, nobtn;
 	JTextArea p1status, p2status, text, d1, d2;
@@ -127,15 +148,20 @@ public class Board extends JFrame implements ActionListener{
 		
 		
 		//전반적인 레이아웃 짜는 부분
+		for(int i = 0; i < 33; i++){
+			for(int j = 0; j < 2; j++){
+			}
+		}
+		
 		createImage(imageLabel1, 690, 670);
-		createImage(imageLabel2, block1.x_position, block1.y_position);
+		createImage(imageLabel2, 610, 670);
 		createImage(imageLabel3, 530, 670);
 		createImage(imageLabel4, 450, 670);
 		createImage(imageLabel5, 370, 670);
 		createImage(imageLabel6, 290, 670);
 		createImage(imageLabel7, 210, 670);
 		createImage(imageLabel8, 130, 670);
-		createImage(imageLabel9, 50, 670);
+		//createImage(imageLabel9, 50, 670);
 		createImage(imageLabel10, 50, 590);
 		createImage(imageLabel11, 50, 510);
 		createImage(imageLabel12, 50, 430);
