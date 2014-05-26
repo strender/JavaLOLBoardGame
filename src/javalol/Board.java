@@ -95,8 +95,10 @@ public class Board extends JFrame implements ActionListener{
 			new JLabel(image[28]), new JLabel(image[29]), new JLabel(image[30]), new JLabel(image[31])
 	};
 	
-	ImageIcon image33 = new ImageIcon("images/test.png");
-	JLabel imageLabel33 = new JLabel(image33);
+	ImageIcon p1token = new ImageIcon("images/p1token.jpg");
+	JLabel p1tokenLabel = new JLabel(p1token);
+	ImageIcon p2token = new ImageIcon("images/p2token.jpg");
+	JLabel p2tokenLabel = new JLabel(p2token);
 	
 	JButton dice, okbtn, yesbtn, nobtn;
 	JTextArea p1status, p2status, text, d1, d2;
@@ -113,11 +115,15 @@ public class Board extends JFrame implements ActionListener{
 		
 		
 		//전반적인 레이아웃 짜는 부분
-		drawBoard();
+		p1tokenLabel.setLocation(places[0][0] + 10, places[0][1] + 10);
+		p1tokenLabel.setSize(60, 60);
+		add(p1tokenLabel);
 		
-		imageLabel33.setLocation(400, 400);
-		imageLabel33.setSize(20, 20);
-		add(imageLabel33);
+		p2tokenLabel.setLocation(places[0][0] + 10, places[0][1] + 10);
+		p2tokenLabel.setSize(60, 60);
+		add(p2tokenLabel);
+		
+		drawBoard();
 		
 		//버튼 부착
 		dice = new JButton("ROLL_DICE");
@@ -178,12 +184,15 @@ public class Board extends JFrame implements ActionListener{
 			if(next == 1){
 				text.append(p1.Name + "'s Turn! Roll the Dice! \n");
 				text.append(dice_num + "!\n");
-				p1.Move(dice_num);
+				p1tokenLabel.setLocation(places[p1.Move(dice_num)][0]+10, places[p1.Move(dice_num)][1]+10);
+				
 				text.append(p1.alertLocation());
-				break;
-				//next = 2;
+				next = 2;
+				continue;
 			}else{
 				text.append(p2.Name + "'s Turn! Roll the Dice! \n");
+				next = 1;
+				break;
 			}
 		}
 	}//END of constructor
