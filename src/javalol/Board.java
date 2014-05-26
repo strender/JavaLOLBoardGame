@@ -43,9 +43,9 @@ public class Board extends JFrame implements ActionListener{
 		{690, 110}, {690, 190}, {690, 270}, {690, 350}, {690, 430}, {690, 510}, {690, 590} //오른쪽 세로줄
 	};
 	
-	//이미지 아이콘을 저장해둔 배열.
+	//이미지를 저장해둔 배열.
 	ImageIcon[] image = {
-		//밑 가로줄
+		//밑 가로줄(0~8)
 		new ImageIcon("images/white.jpeg"), //Start Position
 		new ImageIcon("images/Alistar.png"),
 		new ImageIcon("images/Garen.png"),
@@ -55,7 +55,7 @@ public class Board extends JFrame implements ActionListener{
 		new ImageIcon("images/Darius.png"),
 		new ImageIcon("images/Caitlyn.png"),
 		new ImageIcon("images/white.jpeg"), //Disconnect
-		//왼쪽 세로줄
+		//왼쪽 세로줄(9~16)
 		new ImageIcon("images/Ryze.png"),
 		new ImageIcon("images/TwistedFate.png"),
 		new ImageIcon("images/white.jpeg"), //Chance Card
@@ -64,7 +64,7 @@ public class Board extends JFrame implements ActionListener{
 		new ImageIcon("images/Graves.png"),
 		new ImageIcon("images/Lucian.png"),
 		new ImageIcon("images/white.jpeg"), //Chance Card
-		//위 가로줄
+		//위 가로줄(19~24)
 		new ImageIcon("images/Khazix.png"),
 		new ImageIcon("images/Renekton.png"),
 		new ImageIcon("images/white.jpeg"), //Chance Card
@@ -73,7 +73,7 @@ public class Board extends JFrame implements ActionListener{
 		new ImageIcon("images/Velkoz.png"),
 		new ImageIcon("images/Ahri.png"),
 		new ImageIcon("images/white.jpeg"), //Chance Card
-		//오른쪽 세로줄
+		//오른쪽 세로줄(25~31)
 		new ImageIcon("images/Brand.png"),
 		new ImageIcon("images/Annie.png"),
 		new ImageIcon("images/Syndra.png"),
@@ -83,8 +83,7 @@ public class Board extends JFrame implements ActionListener{
 		new ImageIcon("images/Draven.png"),
 	};
 	
-	//이미지 아이콘을 감싸줄 레이블을 저장해둔 배열.
-	//iLabel[0] = new JLabel("images/white.jpeg");
+	//이미지를 감싸줄 레이블을 저장해둔 배열.
 	JLabel[] imageLabel = { 
 			new JLabel(image[0]), new JLabel(image[1]), new JLabel(image[2]), new JLabel(image[3]),
 			new JLabel(image[4]), new JLabel(image[5]), new JLabel(image[6]), new JLabel(image[7]),
@@ -102,6 +101,7 @@ public class Board extends JFrame implements ActionListener{
 	JButton dice, okbtn, yesbtn, nobtn;
 	JTextArea p1status, p2status, text, d1, d2;
 	Border border = BorderFactory.createLineBorder(Color.black);
+	ButtonListener buttonListener;
 	
 	//Constructor method
 	public Board(){
@@ -116,41 +116,6 @@ public class Board extends JFrame implements ActionListener{
 		for(int i = 0; i < 32; i++){
 			createImage(imageLabel[i], places[i][0], places[i][1]);
 		}
-		
-		/*
-		createImage(imageLabel1, 690, 670);
-		createImage(imageLabel2, 610, 670);
-		createImage(imageLabel3, 530, 670);
-		createImage(imageLabel4, 450, 670);
-		createImage(imageLabel5, 370, 670);
-		createImage(imageLabel6, 290, 670);
-		createImage(imageLabel7, 210, 670);
-		createImage(imageLabel8, 130, 670);
-		//createImage(imageLabel9, 50, 670);
-		createImage(imageLabel10, 50, 590);
-		createImage(imageLabel11, 50, 510);
-		createImage(imageLabel12, 50, 430);
-		createImage(imageLabel13, 50, 350);
-		createImage(imageLabel14, 50, 270);
-		createImage(imageLabel15, 50, 190);
-		createImage(imageLabel16, 50, 110);
-		createImage(imageLabel17, 50, 30);
-		createImage(imageLabel18, 130, 30);
-		createImage(imageLabel19, 210, 30);
-		createImage(imageLabel20, 290, 30);
-		createImage(imageLabel21, 370, 30);
-		createImage(imageLabel22, 450, 30);
-		createImage(imageLabel23, 530, 30);
-		createImage(imageLabel24, 610, 30);
-		createImage(imageLabel25, 690, 30);
-		createImage(imageLabel26, 690, 110);
-		createImage(imageLabel27, 690, 190);
-		createImage(imageLabel28, 690, 270);
-		createImage(imageLabel29, 690, 350);
-		createImage(imageLabel30, 690, 430);
-		createImage(imageLabel31, 690, 510);
-		createImage(imageLabel32, 690, 590);
-		*/
 		
 		imageLabel33.setLocation(400, 400);
 		imageLabel33.setSize(20, 20);
