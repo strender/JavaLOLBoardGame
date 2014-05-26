@@ -11,6 +11,11 @@ public class Player {
 	public boolean disconnect = false;
 	public int turns = 0;
 	
+	
+	public int placement[][] = {
+			
+	};
+	
 	public void setName(){
 		String s = JOptionPane.showInputDialog("Player" + PlayerNum + " 이름 입력:");
 		this.Name = s;
@@ -28,6 +33,7 @@ public class Player {
 			position += dice;
 		} else{
 			position = position + dice - 32;
+			money += 200;
 		}
 	}
 	
