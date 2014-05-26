@@ -2,10 +2,8 @@ package javalol;
 
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -16,6 +14,10 @@ import javax.swing.JTextArea;
 import javax.swing.border.Border;
 
 public class Board extends JFrame implements ActionListener{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1015459599455368218L;
 	//전체  Frame 크기 지정
 	private int width = 1200; //프레임의 가로길이
 	private int height = 800; //프레임의 세로길이
@@ -41,7 +43,8 @@ public class Board extends JFrame implements ActionListener{
 		{690, 110}, {690, 190}, {690, 270}, {690, 350}, {690, 430}, {690, 510}, {690, 590} //오른쪽 세로줄 끝
 	};
 	
-	ImageIcon imagetest[] = {
+	//이미지 아이콘을 저장해둔 배열.
+	ImageIcon[] image = {
 		new ImageIcon("images/white.jpeg"),
 		new ImageIcon("images/Alistar.png"),
 		new ImageIcon("images/Garen.png"),
@@ -55,6 +58,13 @@ public class Board extends JFrame implements ActionListener{
 		new ImageIcon(""),
 		new ImageIcon(""),
 		new ImageIcon(""),
+	};
+	
+	//이미지 아이콘을 감싸줄 레이블을 저장해둔 배열.
+	JLabel[] imageLabel = { 
+		new JLabel(image[0]),
+		new JLabel(image[1]),
+		new JLabel(image[2])
 	};
 	
 	ImageIcon image0 = new ImageIcon("images/white.jpeg"); //Start Position
@@ -131,9 +141,6 @@ public class Board extends JFrame implements ActionListener{
 	ImageIcon image33 = new ImageIcon("images/test.png");
 	JLabel imageLabel33 = new JLabel(image33);
 	
-	ImageIcon[] image = {image1, image2};
-	
-	Graphics g;
 	JButton dice, okbtn, yesbtn, nobtn;
 	JTextArea p1status, p2status, text, d1, d2;
 	Border border = BorderFactory.createLineBorder(Color.black);
