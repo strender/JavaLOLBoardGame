@@ -35,6 +35,8 @@ public class Board extends JFrame implements ActionListener{
 	
 	ArrayList<ImageIcon> imageIcon= new ArrayList<ImageIcon>();
 	
+	Block block0 = new Block();
+	Block block1 = new Block("Alistar", false, 1, 1, 1, 1, 1, 610, 670);
 	
 	ImageIcon image1 = new ImageIcon("images/white.jpeg"); //Start Position
 	JLabel imageLabel1 = new JLabel(image1);
@@ -126,7 +128,7 @@ public class Board extends JFrame implements ActionListener{
 		
 		//전반적인 레이아웃 짜는 부분
 		createImage(imageLabel1, 690, 670);
-		createImage(imageLabel2, 610, 670);
+		createImage(imageLabel2, block1.x_position, block1.y_position);
 		createImage(imageLabel3, 530, 670);
 		createImage(imageLabel4, 450, 670);
 		createImage(imageLabel5, 370, 670);
@@ -220,7 +222,6 @@ public class Board extends JFrame implements ActionListener{
 			resetMessage();
 			if(next == 1){
 				text.append(p1.Name + "'s Turn! Roll the Dice! \n");
-				dice_num = rollDice();
 				text.append(dice_num + "!\n");
 				p1.Move(dice_num);
 				text.append(p1.alertLocation());
