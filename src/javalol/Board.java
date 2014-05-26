@@ -46,38 +46,38 @@ public class Board extends JFrame implements ActionListener{
 	//이미지를 저장해둔 배열.
 	ImageIcon[] image = {
 		//밑 가로줄(0~8)
-		new ImageIcon("images/white.jpeg"), //Start Position
+		new ImageIcon("images/Start.jpeg"), //Start Position
 		new ImageIcon("images/Alistar.png"),
 		new ImageIcon("images/Garen.png"),
 		new ImageIcon("images/Zac.png"),
-		new ImageIcon("images/white.jpeg"), //Chance Card
+		new ImageIcon("images/Chancecard.jpeg"), //Chance Card
 		new ImageIcon("images/Heimerdinger.png"),
 		new ImageIcon("images/Darius.png"),
 		new ImageIcon("images/Caitlyn.png"),
-		new ImageIcon("images/white.jpeg"), //Disconnect
+		new ImageIcon("images/Chancecard.jpeg"), //Disconnect
 		//왼쪽 세로줄(9~16)
 		new ImageIcon("images/Ryze.png"),
 		new ImageIcon("images/TwistedFate.png"),
-		new ImageIcon("images/white.jpeg"), //Chance Card
+		new ImageIcon("images/Chancecard.jpeg"), //Chance Card
 		new ImageIcon("images/Vladimir.png"),
-		new ImageIcon("images/white.jpeg"), //Chance Card
+		new ImageIcon("images/Chancecard.jpeg"), //Chance Card
 		new ImageIcon("images/Graves.png"),
 		new ImageIcon("images/Lucian.png"),
-		new ImageIcon("images/white.jpeg"), //Chance Card
+		new ImageIcon("images/Chancecard.jpeg"), //Chance Card
 		//위 가로줄(19~24)
 		new ImageIcon("images/Khazix.png"),
 		new ImageIcon("images/Renekton.png"),
-		new ImageIcon("images/white.jpeg"), //Chance Card
+		new ImageIcon("images/Chancecard.jpeg"), //Chance Card
 		new ImageIcon("images/Lissandra.png"),
 		new ImageIcon("images/Nidalee.png"),
 		new ImageIcon("images/Velkoz.png"),
 		new ImageIcon("images/Ahri.png"),
-		new ImageIcon("images/white.jpeg"), //Chance Card
+		new ImageIcon("images/Chancecard.jpeg"), //Chance Card
 		//오른쪽 세로줄(25~31)
 		new ImageIcon("images/Brand.png"),
 		new ImageIcon("images/Annie.png"),
 		new ImageIcon("images/Syndra.png"),
-		new ImageIcon("images/white.jpeg"), //Chance Card
+		new ImageIcon("images/Chancecard.jpeg"), //Chance Card
 		new ImageIcon("images/Katarina.png"),
 		new ImageIcon("images/DrMundo.png"),
 		new ImageIcon("images/Draven.png"),
@@ -113,9 +113,7 @@ public class Board extends JFrame implements ActionListener{
 		
 		
 		//전반적인 레이아웃 짜는 부분
-		for(int i = 0; i < 32; i++){
-			createImage(imageLabel[i], places[i][0], places[i][1]);
-		}
+		drawBoard();
 		
 		imageLabel33.setLocation(400, 400);
 		imageLabel33.setSize(20, 20);
@@ -196,6 +194,12 @@ public class Board extends JFrame implements ActionListener{
 		label.setLocation(xLocation, yLocation);
 		label.setSize(80, 80);
 		add(label);
+	}
+	
+	public void drawBoard(){
+		for(int i = 0; i < 32; i++){
+			createImage(imageLabel[i], places[i][0], places[i][1]);
+		}
 	}
 	
 	//text창 초기화하기
