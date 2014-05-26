@@ -28,13 +28,14 @@ public class Player {
 		health = 550;
 	}
 	
-	public void Move(int dice){
+	public int Move(int dice){
 		if(position+dice < 32){
 			position += dice;
 		} else{
 			position = position + dice - 32;
 			money += 200;
 		}
+		return position;
 	}
 	
 	public String alertLocation(){
