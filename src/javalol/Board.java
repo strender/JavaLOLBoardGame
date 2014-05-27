@@ -183,12 +183,13 @@ public class Board extends JFrame implements ActionListener{
 			resetMessage();
 			if(next == 1){
 				text.append(p1.Name + "'s Turn! Roll the Dice! \n");
+				rollDice();
 				text.append(dice_num + "!\n");
-				p1tokenLabel.setLocation(places[p1.Move(dice_num)][0]+10, places[p1.Move(dice_num)][1]+10);
-				
+				p1.Move(dice_num);
+				p1tokenLabel.setLocation(places[p1.position][0]+10, places[p1.position][1]+10);
 				text.append(p1.alertLocation());
 				next = 2;
-				continue;
+				break;
 			}else{
 				text.append(p2.Name + "'s Turn! Roll the Dice! \n");
 				next = 1;
@@ -223,10 +224,8 @@ public class Board extends JFrame implements ActionListener{
 		total_dice = dice1 + dice2;
 		//g.fill3DRect(300, 300, 100, 100, true);
 		//g.fill3DRect(300, 400, 100, 100, true);
+		dice_num = total_dice;
 		return total_dice;
-		
-		
-		
 		
 	}
 	@Override
