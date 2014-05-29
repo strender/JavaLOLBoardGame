@@ -116,11 +116,11 @@ public class Board extends JFrame implements ActionListener{
 		
 		//전반적인 레이아웃 짜는 부분
 		p1tokenLabel.setLocation(places[0][0] + 10, places[0][1] + 10);
-		p1tokenLabel.setSize(60, 60);
+		p1tokenLabel.setSize(20, 20);
 		add(p1tokenLabel);
 		
-		p2tokenLabel.setLocation(places[0][0] + 10, places[0][1] + 10);
-		p2tokenLabel.setSize(60, 60);
+		p2tokenLabel.setLocation(places[0][0] + 50, places[0][1] + 50);
+		p2tokenLabel.setSize(20, 20);
 		add(p2tokenLabel);
 		
 		drawBoard();
@@ -186,7 +186,7 @@ public class Board extends JFrame implements ActionListener{
 				rollDice();
 				text.append(dice_num + "!\n");
 				p1.Move(dice_num);
-				p1tokenLabel.setLocation(places[p1.position][0]+10, places[p1.position][1]+10);
+				p1tokenLabel.setLocation(places[p1.getPosition()][0]+10, places[p1.getPosition()][1]+10);
 				text.append(p1.alertLocation());
 				next = 2;
 				break;
@@ -215,7 +215,7 @@ public class Board extends JFrame implements ActionListener{
 	//text창 초기화하기
 	public void resetMessage(){
 		text.setText("");
-	}
+	}	
 	
 	public int rollDice(){
 		int total_dice = 0;
@@ -235,11 +235,11 @@ public class Board extends JFrame implements ActionListener{
 			dice_num = rollDice();
 			text.append("" + dice_num + "!\n");
 		} else if(e.getActionCommand() == "OK"){
-			System.out.println("Ok");
+			System.out.println("O");
 		} else if(e.getActionCommand() == "YES"){
-			System.out.println("Yes");
+			System.out.println("Y");
 		} else{ 
-			System.out.println("NO");
+			System.out.println("N");
 		}//END of if..else
 		
 	}
