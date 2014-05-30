@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.Scanner;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -104,6 +106,8 @@ public class Board extends JFrame implements ActionListener{
 	JTextArea p1status, p2status, text, d1, d2;
 	Border border = BorderFactory.createLineBorder(Color.black);
 	ButtonListener buttonListener;
+	Scanner scan;
+	int opinion;
 	
 	//Constructor method
 	public Board(){
@@ -113,7 +117,8 @@ public class Board extends JFrame implements ActionListener{
 		setLayout(null);
 		setResizable(false);
 		
-		
+		scan = new Scanner(System.in);
+
 		//전반적인 레이아웃 짜는 부분
 		p1tokenLabel.setLocation(places[0][0] + 10, places[0][1] + 10);
 		p1tokenLabel.setSize(20, 20);
@@ -184,14 +189,16 @@ public class Board extends JFrame implements ActionListener{
 			if(next == 1){
 				text.append(p1.Name + "'s Turn! Roll the Dice! \n");
 				rollDice();
-				text.append(dice_num + "!\n");
-				p1.Move(dice_num);
-				p1tokenLabel.setLocation(places[p1.getPosition()][0]+10, places[p1.getPosition()][1]+10);
-				text.append(p1.alertLocation());
+				redrawToken(p1tokenLabel, p1);
+				text.append(dice_num + "!\n" + p1.alertLocation());
+				//getOpinion(opinion);
 				next = 2;
 				break;
 			}else{
 				text.append(p2.Name + "'s Turn! Roll the Dice! \n");
+				rollDice();
+				text.append(dice_num + "!\n" + p2.alertLocation());
+				redrawToken(p2tokenLabel, p2);
 				next = 1;
 				break;
 			}
@@ -206,6 +213,16 @@ public class Board extends JFrame implements ActionListener{
 		add(label);
 	}
 	
+	
+	public void redrawToken(JLabel token, Player p){
+		p.Move(dice_num);
+		if(p.PlayerNum == 1){
+			token.setLocation(places[p.getPosition()][0] + 10, places[p.getPosition()][1] + 10);
+		} else{
+			token.setLocation(places[p.getPosition()][0] + 50, places[p.getPosition()][1] + 50);
+		}
+	}
+	
 	public void drawBoard(){
 		for(int i = 0; i < 32; i++){
 			createImage(imageLabel[i], places[i][0], places[i][1]);
@@ -215,7 +232,11 @@ public class Board extends JFrame implements ActionListener{
 	//text창 초기화하기
 	public void resetMessage(){
 		text.setText("");
-	}	
+	}
+	
+	public void getOpinion(String o){
+		 o = scan.next();
+	}
 	
 	public int rollDice(){
 		int total_dice = 0;
@@ -226,8 +247,8 @@ public class Board extends JFrame implements ActionListener{
 		//g.fill3DRect(300, 400, 100, 100, true);
 		dice_num = total_dice;
 		return total_dice;
-		
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
