@@ -183,7 +183,9 @@ public class Board extends JFrame implements ActionListener{
 		//레이아웃 다짠 후에 패널 부착!
 		Container contentPane = getContentPane();
 		contentPane.setBackground(Color.WHITE);
-		
+	
+	}//END of constructor
+	public void run(){
 		while(!finish){
 			resetMessage();
 			if(next == 1){
@@ -203,7 +205,8 @@ public class Board extends JFrame implements ActionListener{
 				break;
 			}
 		}
-	}//END of constructor
+	}
+	
 	
 	
 	//이미지 붙이는데 코드 줄이기 위한 메서드
