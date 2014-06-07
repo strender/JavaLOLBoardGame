@@ -35,7 +35,7 @@ public class Board extends JFrame implements ActionListener{
 	//TextArea에 출력되는 메세지
 	String p1stat = p1.Name + "\nMoney: " + p1.money + "$\nHP: " + p1.health;
 	String p2stat = p2.Name + "\nMoney: " + p2.money + "$\nHP: " + p2.health;
-	String message = "여기에 게임 진행상황이 나타날 것입니다.";
+	String message = "Game Start! \n";
 	
 	//이미지 배치할 좌표 지정해둔 정수형 배열.
 	int places[][] = {
@@ -106,8 +106,8 @@ public class Board extends JFrame implements ActionListener{
 	JTextArea p1status, p2status, text, d1, d2;
 	Border border = BorderFactory.createLineBorder(Color.black);
 	ButtonListener buttonListener;
-	Scanner scan;
-	int opinion;
+	
+	PHManager phm = new PHManager(p1, p2);
 	
 	//Constructor method
 	public Board(){
@@ -116,8 +116,6 @@ public class Board extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(null);
 		setResizable(false);
-		
-		scan = new Scanner(System.in);
 
 		//전반적인 레이아웃 짜는 부분
 		p1tokenLabel.setLocation(places[0][0] + 10, places[0][1] + 10);
@@ -136,24 +134,18 @@ public class Board extends JFrame implements ActionListener{
 		dice.setSize(100, 30);
 		add(dice);
 		
-		okbtn = new JButton("OK");
+		okbtn = new JButton("BUY");
 		okbtn.setLocation(1000, 500);
 		okbtn.setSize(100, 30);
 		add(okbtn);
 		
-		yesbtn = new JButton("YES");
-		yesbtn.setLocation(900, 540);
-		yesbtn.setSize(100, 30);
-		add(yesbtn);
-		
-		nobtn = new JButton("NO");
-		nobtn.setLocation(1000, 540);
-		nobtn.setSize(100, 30);
+		nobtn = new JButton("END TURN");
+		nobtn.setLocation(900, 540);
+		nobtn.setSize(200, 30);
 		add(nobtn);
 		
 		dice.addActionListener(this);
 		okbtn.addActionListener(this);
-		yesbtn.addActionListener(this);
 		nobtn.addActionListener(this);
 		
 		//TextArea
@@ -185,27 +177,6 @@ public class Board extends JFrame implements ActionListener{
 		contentPane.setBackground(Color.WHITE);
 	
 	}//END of constructor
-	public void run(){
-		while(!finish){
-			resetMessage();
-			if(next == 1){
-				text.append(p1.Name + "'s Turn! Roll the Dice! \n");
-				rollDice();
-				redrawToken(p1tokenLabel, p1);
-				text.append(dice_num + "!\n" + p1.alertLocation());
-				//getOpinion(opinion);
-				next = 2;
-				break;
-			}else{
-				text.append(p2.Name + "'s Turn! Roll the Dice! \n");
-				rollDice();
-				text.append(dice_num + "!\n" + p2.alertLocation());
-				redrawToken(p2tokenLabel, p2);
-				next = 1;
-				break;
-			}
-		}
-	}
 	
 	
 	
@@ -237,8 +208,9 @@ public class Board extends JFrame implements ActionListener{
 		text.setText("");
 	}
 	
-	public void getOpinion(String o){
-		 o = scan.next();
+	public void refreshStat(){ 
+		p1status.setText(p1.Name + "\nMoney: " + p1.money + "$\nHP: " + p1.health);
+		p2status.setText(p2.Name + "\nMoney: " + p2.money + "$\nHP: " + p2.health);
 	}
 	
 	public int rollDice(){
@@ -246,25 +218,171 @@ public class Board extends JFrame implements ActionListener{
 		int dice1 = (int) (Math.random() * 6) + 1;
 		int dice2 = (int) (Math.random() * 6) + 1;
 		total_dice = dice1 + dice2;
-		//g.fill3DRect(300, 300, 100, 100, true);
-		//g.fill3DRect(300, 400, 100, 100, true);
 		dice_num = total_dice;
 		return total_dice;
 	}
 	
+	public void damageCheck(int num, int location){
+		int total = 0;
+		if(phm.block_name[location].owned == 0){
+			return;
+		} else{
+			if(phm.block_name[location].owned != num){
+				for(int i = 0; i < 5; i++){
+					if(phm.block_name[location].damage[i] >0){
+						total += phm.block_name[location].damage[i];
+					}
+				}
+				if(num == 1){
+					p1.health -= total;
+				}else{
+					p2.health -= total;
+				}
+				text.append(total + " 만큼 공격을 받았습니다! \n");//END of for
+			} else{
+				for(int i = 0; i < 5; i++){
+					if(phm.block_name[location].damage[i] < 0){
+						total += phm.block_name[location].damage[i];
+					}
+					if(num == 1){
+						p1.health -= phm.block_name[location].damage[i];
+					}else{
+						p2.health -= phm.block_name[location].damage[i];
+					}
+				}//END of for
+				if(total < 0){
+					text.append(total + "만큼 회복하였습니다! \n");
+				}
+				
+			}
+		}
+	}//END of damageCheck
+
+	public void Buy(int num, int location){
+		if(phm.block_name[location].owned != num){
+			if(num == 1){
+				p1.money -= phm.block_name[location].price[0];
+			} else{
+				p2.money -= phm.block_name[location].price[0];
+			}
+			phm.block_name[location].owned = num;
+		}
+	}
+	
+	public void chancechance(int num){
+		text.append("Chance Card!");
+		int rnum = (int) (Math.random()*5 + 1);
+		text.append(phm.cc[rnum].chance);
+		switch (rnum) {
+		case 0:
+			if(num == 1){
+				p1.money += 150;
+			}else{
+				p2.money += 150;
+			}
+			break;
+		case 1:
+			if(num == 1){
+				p1.money += 200;
+			}else{
+				p2.money += 200;
+			}
+			break;
+		case 2:
+			if(num == 1){
+				p1.health += 200;
+			}else{
+				p2.health += 200;
+			}
+			break;
+		case 3:
+			if(num == 1){
+				p1.health += 150;
+			}else{
+				p2.health += 150;
+			}
+			break;
+		case 4:
+			if(num == 1){
+				p2.health -= 150;
+			}else{
+				p1.health -= 150;
+			}
+			break;
+		case 5:
+			break;
+		}
+		refreshStat();
+	}
+	
+	public int getPosition(int num){
+		int result;
+		if(num == 1){
+			result = p1.getPosition();
+		} else{
+			result = p2.getPosition();
+		}
+		return result;
+	}
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		//주사위 굴리기 버튼
 		if(e.getActionCommand() == "ROLL_DICE"){
-			dice_num = rollDice();
-			text.append("" + dice_num + "!\n");
-		} else if(e.getActionCommand() == "OK"){
-			System.out.println("O");
-		} else if(e.getActionCommand() == "YES"){
-			System.out.println("Y");
-		} else{ 
-			System.out.println("N");
+			dice.setEnabled(false);
+			//Player 1
+			if(next == 1){
+				dice_num = rollDice();
+				text.append("" + dice_num + "!\n");
+				redrawToken(p1tokenLabel, p1);
+				//text.append(p1.alertLocation());
+				if(phm.block_name[p1.getPosition()].is_special){
+					chancechance(next);
+					okbtn.setEnabled(false);
+				} else{
+					okbtn.setEnabled(true);
+					damageCheck(next, getPosition(next));
+					refreshStat();
+					text.append(phm.block_name[p1.getPosition()].location_name + "을 구매하시겠습니까?(BUY) \n");
+				}
+			//Player 2	
+			} else{
+				dice_num = rollDice();
+				text.append("" + dice_num + "!\n");
+				redrawToken(p2tokenLabel, p2);
+				//text.append(p2.alertLocation());
+				if(phm.block_name[p2.getPosition()].is_special){
+					chancechance(next);
+					okbtn.setEnabled(false);
+				} else{
+					okbtn.setEnabled(true);
+					damageCheck(next, getPosition(next));
+					refreshStat();
+					text.append(phm.block_name[p2.getPosition()].location_name + "을 구매하시겠습니까?(BUY) \n");
+				}
+			}
+		//BUY버튼	
+		} else if(e.getActionCommand() == "BUY"){
+			Buy(next, getPosition(next));
+			text.append("구매완료!");
+			okbtn.setEnabled(false);
+			refreshStat();
+		// NEXT TURN 버튼	
+		} else{
+			resetMessage();
+			if(next == 1){
+				next = 2;
+				text.append(p2.Name + " 의 차례입니다! \n");
+			} else{
+				next = 1;
+				text.append(p1.Name + " 의 차례입니다!");
+			}
+			dice.setEnabled(true);
+			okbtn.setEnabled(false);
+			text.append("주사위를 던지세요! \n");
 		}//END of if..else
 		
-	}
+	}//END of ActionEventListener
 }

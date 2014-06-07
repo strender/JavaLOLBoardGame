@@ -11,11 +11,6 @@ public class Player {
 	public boolean disconnect = false;
 	public int turns = 0;
 	
-	
-	public int placement[][] = {
-			
-	};
-	
 	public void setName(){
 		String s = JOptionPane.showInputDialog("Player" + PlayerNum + " 이름 입력:");
 		this.Name = s;
@@ -34,19 +29,12 @@ public class Player {
 		} else{
 			position = position + dice - 32;
 			money += 200;
+			health += 150;
+			turns += 1;
 		}
 	}
 	
 	public int getPosition(){
 		return position;
-	}
-	
-	public String alertLocation(){
-		String s = Name + "이" + position + "을 밟았습니다!";
-		return s;
-	}
-	
-	public void drawPlayer(){
-		
 	}	
 }
