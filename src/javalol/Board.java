@@ -256,6 +256,17 @@ public class Board extends JFrame implements ActionListener{
 				
 			}
 		}
+		if(p1.health <= 0 || p2.health <= 0){
+			text.append("GAME END");
+			okbtn.setEnabled(false);
+			dice.setEnabled(false);
+			nobtn.setEnabled(false);
+			if(p1.health > p2.health){
+				text.append("Player 1 " + p1.Name + " Win!");
+			}else{
+				text.append("Player 2 " + p2.Name + " Win!");
+			}
+		}
 	}//END of damageCheck
 
 	public void Buy(int num, int location){
@@ -332,6 +343,7 @@ public class Board extends JFrame implements ActionListener{
 		//주사위 굴리기 버튼
 		if(e.getActionCommand() == "ROLL_DICE"){
 			dice.setEnabled(false);
+			nobtn.setEnabled(true);
 			//Player 1
 			if(next == 1){
 				dice_num = rollDice();
@@ -381,6 +393,7 @@ public class Board extends JFrame implements ActionListener{
 			}
 			dice.setEnabled(true);
 			okbtn.setEnabled(false);
+			nobtn.setEnabled(false);
 			text.append("주사위를 던지세요! \n");
 		}//END of if..else
 		
