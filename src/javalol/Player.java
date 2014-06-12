@@ -10,6 +10,7 @@ public class Player {
 	public int health;
 	public boolean disconnect = false;
 	public int turns = 0;
+	public int add_damage = 0;
 	
 	public void setName(){
 		String s = JOptionPane.showInputDialog("Player" + PlayerNum + " 이름 입력:");
@@ -28,8 +29,8 @@ public class Player {
 			position += dice;
 		} else{
 			position = position + dice - 32;
-			money += 200;
-			health += 150;
+			money += 50;
+			health += 75;
 			turns += 1;
 		}
 	}

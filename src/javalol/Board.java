@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.util.Scanner;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -222,10 +220,10 @@ public class Board extends JFrame implements ActionListener{
 		return total_dice;
 	}
 	
-	public void damageCheck(int num, int location){
+	public int damageCheck(int num, int location){
 		int total = 0;
 		if(phm.block_name[location].owned == 0){
-			return;
+			return 0;
 		} else{
 			if(phm.block_name[location].owned != num){
 				for(int i = 0; i < 5; i++){
@@ -257,67 +255,78 @@ public class Board extends JFrame implements ActionListener{
 			}
 		}
 		if(p1.health <= 0 || p2.health <= 0){
-			text.append("GAME END");
+			text.append("GAME END \n");
 			okbtn.setEnabled(false);
 			dice.setEnabled(false);
 			nobtn.setEnabled(false);
 			if(p1.health > p2.health){
-				text.append("Player 1 " + p1.Name + " Win!");
+				text.append("Player 1 " + p1.Name + " Win! \n");
+				return 1;
 			}else{
-				text.append("Player 2 " + p2.Name + " Win!");
+				text.append("Player 2 " + p2.Name + " Win! \n");
+				return 1;
 			}
 		}
+		return 0;
 	}//END of damageCheck
 
 	public void Buy(int num, int location){
 		if(phm.block_name[location].owned != num){
 			if(num == 1){
-				p1.money -= phm.block_name[location].price[0];
+				if(p1.money - phm.block_name[location].price[0] > 0){
+					p1.money -= phm.block_name[location].price[0];
+					phm.block_name[location].owned = num;
+				} else{
+					text.append("구매하기엔 돈이 부족합니다");
+				}
 			} else{
-				p2.money -= phm.block_name[location].price[0];
+				if(p2.money - phm.block_name[location].price[0] > 0){
+					p2.money -= phm.block_name[location].price[0];
+					phm.block_name[location].owned = num;
+				}
+				text.append("구매하기엔 돈이 부족합니다");
 			}
-			phm.block_name[location].owned = num;
 		}
 	}
 	
 	public void chancechance(int num){
-		text.append("Chance Card!");
+		text.append("Chance Card! \n");
 		int rnum = (int) (Math.random()*5 + 1);
 		text.append(phm.cc[rnum].chance);
 		switch (rnum) {
 		case 0:
 			if(num == 1){
-				p1.money += 150;
+				p1.money += 50;
 			}else{
-				p2.money += 150;
+				p2.money += 50;
 			}
 			break;
 		case 1:
 			if(num == 1){
-				p1.money += 200;
+				p1.money += 100;
 			}else{
-				p2.money += 200;
+				p2.money += 100;
 			}
 			break;
 		case 2:
-			if(num == 1){
-				p1.health += 200;
-			}else{
-				p2.health += 200;
-			}
-			break;
-		case 3:
 			if(num == 1){
 				p1.health += 150;
 			}else{
 				p2.health += 150;
 			}
 			break;
+		case 3:
+			if(num == 1){
+				p1.health += 100;
+			}else{
+				p2.health += 100;
+			}
+			break;
 		case 4:
 			if(num == 1){
-				p2.health -= 150;
+				p2.health -= 120;
 			}else{
-				p1.health -= 150;
+				p1.health -= 120;
 			}
 			break;
 		case 5:
@@ -355,9 +364,12 @@ public class Board extends JFrame implements ActionListener{
 					okbtn.setEnabled(false);
 				} else{
 					okbtn.setEnabled(true);
-					damageCheck(next, getPosition(next));
-					refreshStat();
-					text.append(phm.block_name[p1.getPosition()].location_name + "을 구매하시겠습니까?(BUY) \n");
+					if(damageCheck(next, getPosition(next)) == 0){
+						refreshStat();
+						text.append(phm.block_name[p1.getPosition()].location_name + "을 구매하시겠습니까?(BUY) \n(" + phm.block_name[p1.getPosition()].price[0] + "$)\n");
+					} else{
+						refreshStat();
+					}					
 				}
 			//Player 2	
 			} else{
@@ -370,9 +382,12 @@ public class Board extends JFrame implements ActionListener{
 					okbtn.setEnabled(false);
 				} else{
 					okbtn.setEnabled(true);
-					damageCheck(next, getPosition(next));
-					refreshStat();
-					text.append(phm.block_name[p2.getPosition()].location_name + "을 구매하시겠습니까?(BUY) \n");
+					if(damageCheck(next, getPosition(next)) == 0){
+						refreshStat();
+						text.append(phm.block_name[p2.getPosition()].location_name + "을 구매하시겠습니까?(BUY)\n(" + phm.block_name[p2.getPosition()].price[0] +"$)\n");
+					} else{
+						refreshStat();
+					}
 				}
 			}
 		//BUY버튼	
