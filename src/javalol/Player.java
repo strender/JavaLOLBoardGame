@@ -29,7 +29,7 @@ public class Player {
 			position += dice;
 		} else{
 			position = position + dice - 32;
-			money += 50;
+			money += 60;
 			health += 75;
 			turns += 1;
 		}
