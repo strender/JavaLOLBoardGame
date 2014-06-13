@@ -43,7 +43,7 @@ public class PHManager {
 	
 	ChanceCard[] cc = {
 			new ChanceCard("용을 처치하였습니다! \n돈 50원을 획득합니다!"),
-			new ChanceCard("바론을 처치하였습니다! \n돈 100원과 공격력 +20 효과를 봅니다!"),
+			new ChanceCard("바론을 처치하였습니다! \n돈 100원을 획득합니다!"),
 			new ChanceCard("스펠 회복을 사용하였습니다! \n체력이 증가합니다!"),
 			new ChanceCard("체력 포션을 사용하였습니다! \n체력이 증가합니다!"),
 			new ChanceCard("스펠 점화를 사용하였습니다! \n체력이 감소합니다!"),

@@ -185,7 +185,7 @@ public class Board extends JFrame implements ActionListener{
 		add(label);
 	}
 	
-	
+	//말을 움직이는데 필요한 메서드
 	public void redrawToken(JLabel token, Player p){
 		p.Move(dice_num);
 		if(p.PlayerNum == 1){
@@ -195,6 +195,7 @@ public class Board extends JFrame implements ActionListener{
 		}
 	}
 	
+	//보드판을 그리는 부분. 이미지 부분
 	public void drawBoard(){
 		for(int i = 0; i < 32; i++){
 			createImage(imageLabel[i], places[i][0], places[i][1]);
@@ -206,11 +207,14 @@ public class Board extends JFrame implements ActionListener{
 		text.setText("");
 	}
 	
+	
+	//턴이 끝난 후 돈과 체력을 갱신해주는 메서드
 	public void refreshStat(){ 
 		p1status.setText(p1.Name + "\nMoney: " + p1.money + "$\nHP: " + p1.health);
 		p2status.setText(p2.Name + "\nMoney: " + p2.money + "$\nHP: " + p2.health);
 	}
 	
+	//주사위 돌리는 메서드
 	public int rollDice(){
 		int total_dice = 0;
 		int dice1 = (int) (Math.random() * 6) + 1;
@@ -220,6 +224,8 @@ public class Board extends JFrame implements ActionListener{
 		return total_dice;
 	}
 	
+	
+	//상대방 챔피언을 밟았을 때 데미지를 얼마나 받는지, 혹은 따의 주인이 없는지 체크해주는 것
 	public int damageCheck(int num, int location){
 		int total = 0;
 		if(phm.block_name[location].owned == 0){
@@ -270,25 +276,33 @@ public class Board extends JFrame implements ActionListener{
 		return 0;
 	}//END of damageCheck
 
+	
+	//땅을 구매할 때 필요한 메서드
 	public void Buy(int num, int location){
 		if(phm.block_name[location].owned != num){
 			if(num == 1){
-				if(p1.money - phm.block_name[location].price[0] > 0){
-					p1.money -= phm.block_name[location].price[0];
+				if(p1.money - (phm.block_name[location].price[0] + p1.turns*20) > 0){
+					p1.money -= (phm.block_name[location].price[0] + p1.turns*20);
 					phm.block_name[location].owned = num;
+					text.append("구매완료!");
 				} else{
 					text.append("구매하기엔 돈이 부족합니다");
 				}
 			} else{
-				if(p2.money - phm.block_name[location].price[0] > 0){
-					p2.money -= phm.block_name[location].price[0];
+				if(p2.money - (phm.block_name[location].price[0] + p2.turns*20)> 0){
+					p2.money -= (phm.block_name[location].price[0] + p2.turns*20);
 					phm.block_name[location].owned = num;
+					text.append("구매완료!");
+				} else{
+					text.append("구매하기엔 돈이 부족합니다");
 				}
-				text.append("구매하기엔 돈이 부족합니다");
+				
 			}
 		}
 	}
 	
+	
+	//찬스카드 땅을 밟았을 때 실행되는 메서드
 	public void chancechance(int num){
 		text.append("Chance Card! \n");
 		int rnum = (int) (Math.random()*5 + 1);
@@ -335,6 +349,8 @@ public class Board extends JFrame implements ActionListener{
 		refreshStat();
 	}
 	
+	
+	//플레이어의 위치를 리턴하는 메서드
 	public int getPosition(int num){
 		int result;
 		if(num == 1){
@@ -347,6 +363,7 @@ public class Board extends JFrame implements ActionListener{
 	
 	
 	@Override
+	//버튼이벤트 내용
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		//주사위 굴리기 버튼
@@ -366,7 +383,7 @@ public class Board extends JFrame implements ActionListener{
 					okbtn.setEnabled(true);
 					if(damageCheck(next, getPosition(next)) == 0){
 						refreshStat();
-						text.append(phm.block_name[p1.getPosition()].location_name + "을 구매하시겠습니까?(BUY) \n(" + phm.block_name[p1.getPosition()].price[0] + "$)\n");
+						text.append(phm.block_name[p1.getPosition()].location_name + "을 구매하시겠습니까?(BUY) \n(" + (phm.block_name[p1.getPosition()].price[0]+p1.turns*20)+ "$)\n");
 					} else{
 						refreshStat();
 					}					
@@ -384,7 +401,7 @@ public class Board extends JFrame implements ActionListener{
 					okbtn.setEnabled(true);
 					if(damageCheck(next, getPosition(next)) == 0){
 						refreshStat();
-						text.append(phm.block_name[p2.getPosition()].location_name + "을 구매하시겠습니까?(BUY)\n(" + phm.block_name[p2.getPosition()].price[0] +"$)\n");
+						text.append(phm.block_name[p2.getPosition()].location_name + "을 구매하시겠습니까?(BUY)\n(" + (phm.block_name[p2.getPosition()].price[0]+p2.turns*20) +"$)\n");
 					} else{
 						refreshStat();
 					}
@@ -393,7 +410,6 @@ public class Board extends JFrame implements ActionListener{
 		//BUY버튼	
 		} else if(e.getActionCommand() == "BUY"){
 			Buy(next, getPosition(next));
-			text.append("구매완료!");
 			okbtn.setEnabled(false);
 			refreshStat();
 		// NEXT TURN 버튼	
